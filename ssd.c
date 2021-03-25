@@ -62,6 +62,8 @@ void fullWrite(char* value)
 		else sprintf(cmd, "echo %s]%s >> nand.txt", line, value);
 		system(cmd);
 	}
+
+	fclose(nand);
 }
 
 
