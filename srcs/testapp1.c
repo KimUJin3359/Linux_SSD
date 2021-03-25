@@ -10,11 +10,11 @@ int main()
 
 	// ssd will make a result.txt
 	system("./ssd fullwrite 0xAAAAAAAA");
-	system("./ssd fullread");
+	system("./ssd fullread > ./test_result/result_1.txt");
 	// diff result.txt and test1.txti
-	system("diff ./test_result/test1.txt ./result.txt > ./test_result/result1.txt");
+	system("diff ./test_result/test1.txt ./test_result/result_1.txt > ./test_result/diff.txt");
 	// open result1.txt
-	fd = fopen("./test_result/result1.txt", "r");
+	fd = fopen("./test_result/diff.txt", "r");
 	if (fd == NULL)
 	{
 		printf("# CAN'T READ THE RESULT TEST FILE #\n");
@@ -28,11 +28,12 @@ int main()
 	}
 	else
 	{
+		system("cat ./test_result/result1.txt");
 		printf("===================================\n");
 		printf("# SORRY YOUR SSD FAIL TEST CASE 1 #\n");	
 		printf("===================================\n");
 	}
 	fclose(fd);
-	system("rm ./test_result/result1.txt");
+	system("rm ./test_result/result_1.txt && rm ./test_result/diff.txt");
 	return (0);
 }

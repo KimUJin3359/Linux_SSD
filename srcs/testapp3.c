@@ -30,14 +30,14 @@ int main()
 	for (int i = 0; i < 5; i++)
 	{
 		// read ith address
-		sprintf(cmd, "./ssd read %d", i);
+		sprintf(cmd, "./ssd read %d > ./test_result/result_3.txt", i);
 		system(cmd);
 
 		// diff result.txt and test3.txt
-		system("diff ./test_result/test3.txt ./result.txt > ./test_result/result3.txt");
+		system("diff ./test_result/test3.txt ./test_result/result_3.txt > ./test_result/diff.txt");
 		
 		// open result3.txt
-		fd = fopen("./test_result/result3.txt", "r");
+		fd = fopen("./test_result/diff.txt", "r");
 		if (fd == NULL)
 		{
 			printf("# CAN'T READ THE RESULT TEST FILE #\n");
@@ -51,7 +51,7 @@ int main()
 			printf("# SORRY YOUR SSD FAIL TEST CASE 3 #\n");	
 			printf("===================================\n");
 			fclose(fd);
-			system("rm ./test_result/result3.txt");
+			system("rm ./test_result/result_3.txt && rm ./test_result/diff.txt");
 			return (0);
 		}
 	}
@@ -60,6 +60,6 @@ int main()
 	printf("# CONGRATULATION SUCCESS TEST CASE 3 #\n");	
 	printf("======================================\n");
 	fclose(fd);
-	system("rm ./test_result/result3.txt");
+	system("rm ./test_result/result_3.txt && rm ./test_result/diff.txt");
 	return (0);
 }
