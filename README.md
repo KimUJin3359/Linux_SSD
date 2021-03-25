@@ -11,9 +11,10 @@
 - Test Shell Application : Shell
 - Vertification : SSD를 Test
 
-| SSD | Shell | Vertification |
-| --- | --- | --- |
-| [RhoHeeSeon](https://github.com/RhoHeeSeon) | [dlwlgn](https://github.com/dlwlgn) | [KimUJin3359](https://github.com/KimUJin3359) |
+### Part
+  | SSD | Shell | Vertification |
+  | --- | --- | --- |
+  | [RhoHeeSeon](https://github.com/RhoHeeSeon) | [dlwlgn](https://github.com/dlwlgn) | [KimUJin3359](https://github.com/KimUJin3359) |
 
 ---
 
