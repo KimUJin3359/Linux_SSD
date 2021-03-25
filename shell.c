@@ -4,23 +4,59 @@
 char cmd[100];
 char value[100];
 char f_cmd[300];
-char end;
-int ad;
+char end1, end2;
+int ad, flag = 1;
+
+void READ() {
+	sprintf(f_cmd, "./ssd %s %d", cmd, ad);
+	system(f_cmd);
+}
+
+void WRITE() {
+	sprintf(f_cmd, "./ssd %s %d %s", cmd, ad, value);
+	system(f_cmd);
+}
+
+void FULL() {
+	sprintf(f_cmd, "./ssd %s", cmd);
+	system(f_cmd);
+}
+
+void TEST() {
+	sprintf(f_cmd, "./%s", cmd);
+	system(f_cmd);
+}
 
 int main() {
 	while (1) {
-		printf("SHELL> ");
+		if (flag) {
+			printf("SHELL> ");
+		}
 		scanf("%s", cmd);
 
 		if (strcmp(cmd, "read") == 0) {
-			scanf("%d%c", &ad, &end);
+			scanf("%d", &ad);
 			if (ad < 0 || 99 < ad) {
 				printf("주소의 범위를 벗어났습니다.\n");
 			}
 			else {
-				printf("%d 주소의 값을 Read.\n", ad);
-				sprintf(f_cmd, "./ssd %s %d", cmd, ad);
-				printf("%s\n", f_cmd);
+				scanf("%c", &end1);
+				if (end1 == '\n') {
+					READ();
+					flag = 1;
+				}
+				else {
+					scanf("%c", &end2);
+					if (end2 == '|') {
+						READ();
+						flag = 0;
+						scanf("%c", &end1);
+					}
+					else {
+						printf("INVALID COMMAND.\n");
+						while (getchar() != '\n');
+					}
+				}
 			}
 		}
 		else if (strcmp(cmd, "write") == 0) {
@@ -37,9 +73,23 @@ int main() {
 						}
 
 						if (i == 9) {
-							printf("%d 주소에 %s값을 Write.\n", ad, value);
-							sprintf(f_cmd, "./ssd %s %d %s", cmd, ad, value);
-							printf("%s\n", f_cmd);
+							scanf("%c", &end1);
+							if (end1 == '\n') {
+								WRITE();
+								flag = 1;
+							}
+							else {
+								scanf("%c", &end2);
+								if (end2 == '|') {
+									WRITE();
+									flag = 0;
+									scanf("%c", &end1);
+								}
+								else {
+									printf("INVALID COMMAND.\n");
+									while (getchar() != '\n');
+								}
+							}
 						}
 					}
 				}
@@ -48,8 +98,23 @@ int main() {
 			}
 		}
 		else if (strcmp(cmd, "fullwrite") == 0 || strcmp(cmd, "fullread") == 0) {
-			sprintf(f_cmd, "./ssd %s", cmd);
-			printf("%s\n", f_cmd);
+			scanf("%c", &end1);
+			if (end1 == '\n') {
+				FULL();
+				flag = 1;
+			}
+			else {
+				scanf("%c", &end2);
+				if (end2 == '|') {
+					FULL();
+					flag = 0;
+					scanf("%c", &end1);
+				}
+				else {
+					printf("INVALID COMMAND.\n");
+					while (getchar() != '\n');
+				}
+			}
 		}
 		else if (strcmp(cmd, "exit") == 0) break;
 		else if (strcmp(cmd, "help") == 0) {
@@ -60,9 +125,25 @@ int main() {
 			printf("exit: 쉘 스크립트 프로그램을 종료합니다.\n");
 		}
 		else if (strcmp(cmd, "testapp1") == 0 || strcmp(cmd, "testapp2") == 0 || strcmp(cmd, "testapp3") == 0) {
-			sprintf(f_cmd, "./%s", cmd);
-			printf("%s\n", f_cmd);
+			scanf("%c", &end1);
+			if (end1 == '\n') {
+				TEST();
+				flag = 1;
+			}
+			else {
+				scanf("%c", &end2);
+				if (end2 == '|') {
+					TEST();
+					flag = 0;
+					scanf("%c", &end1);
+				}
+				else {
+					printf("INVALID COMMAND.\n");
+					while (getchar() != '\n');
+				}
+			}
 		}
 		else printf("INVALID COMMAND.\n");
+
 	}
 }
