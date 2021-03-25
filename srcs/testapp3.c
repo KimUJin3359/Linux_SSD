@@ -33,11 +33,11 @@ int main()
 		sprintf(cmd, "./ssd read %d", i);
 		system(cmd);
 
-		// diff result.txt and test2.txt
-		system("diff ./test_result/test2.txt ./result.txt > ./test_result/result2.txt");
+		// diff result.txt and test3.txt
+		system("diff ./test_result/test3.txt ./result.txt > ./test_result/result3.txt");
 		
-		// open result2.txt
-		fd = fopen("./test_result/result2.txt", "r");
+		// open result3.txt
+		fd = fopen("./test_result/result3.txt", "r");
 		if (fd != NULL)
 		{
 			printf("# CAN'T READ THE RESULT TEST FILE #\n");
@@ -48,18 +48,18 @@ int main()
 		if (!(fgetc(fd) && feof(fd)))
 		{
 			printf("===================================\n");
-			printf("# SORRY YOUR SSD FAIL TEST CASE 2 #\n");	
+			printf("# SORRY YOUR SSD FAIL TEST CASE 3 #\n");	
 			printf("===================================\n");
 			fclose(fd);
-			system("rm ./test_result/result2.txt");
+			system("rm ./test_result/result3.txt");
 			return (0);
 		}
 	}
 	// success
 	printf("======================================\n");
-	printf("# CONGRATULATION SUCCESS TEST CASE 2 #\n");	
+	printf("# CONGRATULATION SUCCESS TEST CASE 3 #\n");	
 	printf("======================================\n");
 	fclose(fd);
-	system("rm ./test_result/result2.txt");
+	system("rm ./test_result/result3.txt");
 	return (0);
 }
