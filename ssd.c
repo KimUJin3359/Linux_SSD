@@ -55,7 +55,7 @@ void fullWrite(char* value)
 		// read NAND
 		fgets(line, LINE, nand);
 		
-		// write RESULT
+		// write NAND
 		strtok_r(line, "]", &res);
 		strtok(res, "\n");
 		if(i==0) sprintf(cmd, "echo %s]%s > nand.txt", line, value);
