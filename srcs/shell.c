@@ -23,7 +23,6 @@ void FULL() {
 	system(f_cmd);
 }
 
-//추가 부분
 void FULL_WRITE() {
 	sprintf(f_cmd, "./ssd %s %s", cmd, value);
 	system(f_cmd);
@@ -105,7 +104,37 @@ int main() {
 			}
 		}
 		else if (strcmp(cmd, "fullwrite") == 0) {
-			// FULLWRITE "0xABCDEFFF" 등 뒤에 " " 부분 입력구현 해주셔야합니다 :)
+			scanf("%s", value);
+			if (value[0] == '0' && value[1] == 'x') {
+				for (int i = 2; i < 10; i++) {
+					if ((0 <= value[i] - '0' && value[i] - '0' <= 9) || (0 <= (value[i] - 'A') && (value[i] - 'A') <= 5)) {}
+					else {
+						printf("잘못된 값 형식입니다.\n");
+						break;
+					}
+
+					if (i == 9) {
+						scanf("%c", &end1);
+						if (end1 == '\n') {
+							FULL_WRITE();
+							flag = 1;
+						}
+						else {
+							scanf("%c", &end2);
+							if (end2 == '|') {
+								FULL_WRITE();
+								flag = 0;
+								scanf("%c", &end1);
+							}
+							else {
+								printf("INVALID COMMAND.\n");
+								while (getchar() != '\n');
+							}
+						}
+					}
+				}
+			}
+			else printf("잘못된 값 형식입니다.\n");
 		}
 		else if (strcmp(cmd, "fullread") == 0) {
 			scanf("%c", &end1);
