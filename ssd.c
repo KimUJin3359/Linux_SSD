@@ -6,9 +6,26 @@ char line[LINE];
 char* res;
 char cmd[100];
 
-void write(char* addr, char* value)
+void write(int addr, char* value)
 {
-	printf("%s에 %s 쓰기\n", addr, value);
+	FILE *nand = fopen("./nand.txt", "r");
+	
+	for(int i=0; i<100; i++)
+	{
+		// read NAND
+		fgets(line, LINE, nand);
+		
+		// write RESULT
+		strtok_r(line, "]", &res);
+		strtok(res, "\n");
+		if(i==0 && i==addr) sprintf(cmd, "echo %s]%s > nand.txt", line, value);
+		else if(i==0) sprintf(cmd, "echo %s]%s > nand.txt", line, res);
+		else if(i==addr) sprintf(cmd, "echo %s]%s >> nand.txt", line, value);
+		else sprintf(cmd, "echo %s]%s >> nand.txt", line, res);
+		system(cmd);
+	}
+	
+	fclose(nand);
 }
 
 
@@ -31,9 +48,20 @@ void read(int addr)
 
 void fullWrite(char* value)
 {
+
+	FILE *nand = fopen("./nand.txt", "r");
+	
 	for(int i=0; i<100; i++)
 	{
-		printf("%d에 %s 쓰기\n", i, value);
+		// read NAND
+		fgets(line, LINE, nand);
+		
+		// write RESULT
+		strtok_r(line, "]", &res);
+		strtok(res, "\n");
+		if(i==0) sprintf(cmd, "echo %s]%s > nand.txt", line, value);
+		else sprintf(cmd, "echo %s]%s >> nand.txt", line, value);
+		system(cmd);
 	}
 }
 
@@ -53,9 +81,8 @@ void fullRead()
 		if(i==0) sprintf(cmd, "echo %s > result.txt", res);
 		else sprintf(cmd, "echo %s >> result.txt", res);
 		system(cmd);
-		
 	}
-		
+	
 	fclose(nand);
 }
 
@@ -80,8 +107,7 @@ int main(int argc, char *argv[])
 	fwrite(line, 1, sizeof(line), result);
 	*/
 	
-	//printf("addr= %d, %s\n", atoi(argv[2]), argv[2]);	
-	if(!strcmp(argv[1], "write")) write(argv[2], argv[3]);
+	if(!strcmp(argv[1], "write")) write(atoi(argv[2]), argv[3]);
 	if(!strcmp(argv[1], "read")) read(atoi(argv[2]));
 	if(!strcmp(argv[1], "fullwrite")) fullWrite(argv[2]);
 	if(!strcmp(argv[1], "fullread")) fullRead();
