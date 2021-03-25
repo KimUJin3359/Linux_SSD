@@ -123,6 +123,7 @@ int main() {
 			printf("fullread: 0번 주소부터 99번 주소까지 Read를 수행합니다.\n");
 			printf("fullwrite 값: 0번 주소부터 99번 주소까지 값을 Write합니다.\n");
 			printf("exit: 쉘 스크립트 프로그램을 종료합니다.\n");
+			printf("명령어1 | 명령어2 | 명령어3...: 명령어 여러 개를 연속으로 실행합니다.\n");
 		}
 		else if (strcmp(cmd, "testapp1") == 0 || strcmp(cmd, "testapp2") == 0 || strcmp(cmd, "testapp3") == 0) {
 			scanf("%c", &end1);
