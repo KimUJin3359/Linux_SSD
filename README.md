@@ -9,7 +9,11 @@
 ### To Do
 - SSD : HW를 SW로 구현
 - Test Shell Application : Shell
-- Test Script : SSD를 Test할 Code
+- Vertification : SSD를 Test
+
+| SSD | Shell | Vertification |
+| --- | --- | --- |
+| [RhoHeeSeon](https://github.com/RhoHeeSeon) | [dlwlgn](https://github.com/dlwlgn) | [KimUJin3359](https://github.com/KimUJin3359) |
 
 ---
 
@@ -47,7 +51,7 @@
   - A~F, 0~9까지 숫자 범위만 허용
 - 없는 명령어를 수행하는 경우 "INVALID COMMAND"
 
-#### 구현해야할 Test Case
+#### 구현해야할 Vertification
 - Test 1
   - fullwrite 수행
   - fullread를 수행 후, write 한 값대로 read가 되는지 확인
