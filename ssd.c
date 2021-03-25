@@ -4,28 +4,31 @@
 #define LINE 16
 char line[LINE];
 char* res;
+char cmd[100];
 
 void write(char* addr, char* value)
 {
 	printf("%s에 %s 쓰기\n", addr, value);
 }
+
+
 void read(int addr)
 {
 	FILE *nand = fopen("./nand.txt", "r");
-	FILE *result = fopen("./result.txt", "w");
 	
 	// read NAND
 	fseek(nand, addr * (LINE - 1), SEEK_SET);
-	fgets(line, LINE, nand);
+	fgets(line, LINE - 1, nand);
 	
 	// write RESULT
 	strtok_r(line, "]", &res);
-	printf("%s", res);
-	fwrite(res, 1, 11, result);
-
+	sprintf(cmd, "echo %s > result.txt", res);
+	system(cmd);
+	
 	fclose(nand);
-	fclose(result);
 }
+
+
 void fullWrite(char* value)
 {
 	for(int i=0; i<100; i++)
@@ -33,12 +36,27 @@ void fullWrite(char* value)
 		printf("%d에 %s 쓰기\n", i, value);
 	}
 }
+
+
 void fullRead()
 {
+	FILE *nand = fopen("./nand.txt", "r");
+	
 	for(int i=0; i<100; i++)
 	{
-		printf("%d 읽기\n", i);
+		// read NAND
+		fgets(line, LINE, nand);
+		
+		// write RESULT
+		strtok_r(line, "]", &res);
+		strtok(res, "\n");
+		if(i==0) sprintf(cmd, "echo %s > result.txt", res);
+		else sprintf(cmd, "echo %s >> result.txt", res);
+		system(cmd);
+		
 	}
+		
+	fclose(nand);
 }
 
 
