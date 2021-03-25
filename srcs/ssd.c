@@ -41,7 +41,7 @@ void read(int addr)
 	strtok_r(line, "]", &res);
 	sprintf(cmd, "echo %s > result.txt", res);
 	system(cmd);
-	
+	printf("%s\n", res);
 	fclose(nand);
 }
 
@@ -82,6 +82,7 @@ void fullRead()
 		if(i==0) sprintf(cmd, "echo %s > result.txt", res);
 		else sprintf(cmd, "echo %s >> result.txt", res);
 		system(cmd);
+		printf("%s\n", res);
 	}
 	
 	fclose(nand);

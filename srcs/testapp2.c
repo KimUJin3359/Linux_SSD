@@ -38,7 +38,7 @@ int main()
 		
 		// open result2.txt
 		fd = fopen("./test_result/result2.txt", "r");
-		if (fd != NULL)
+		if (fd == NULL)
 		{
 			printf("# CAN'T READ THE RESULT TEST FILE #\n");
 			return (0);

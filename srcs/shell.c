@@ -23,6 +23,12 @@ void FULL() {
 	system(f_cmd);
 }
 
+//추가 부분
+void FULL_WRITE() {
+	sprintf(f_cmd, "./ssd %s %s", cmd, value);
+	system(f_cmd);
+}
+
 void TEST() {
 	sprintf(f_cmd, "./%s", cmd);
 	system(f_cmd);
@@ -98,7 +104,10 @@ int main() {
 
 			}
 		}
-		else if (strcmp(cmd, "fullwrite") == 0 || strcmp(cmd, "fullread") == 0) {
+		else if (strcmp(cmd, "fullwrite") == 0) {
+			// FULLWRITE "0xABCDEFFF" 등 뒤에 " " 부분 입력구현 해주셔야합니다 :)
+		}
+		else if (strcmp(cmd, "fullread") == 0) {
 			scanf("%c", &end1);
 			if (end1 == '\n') {
 				FULL();
