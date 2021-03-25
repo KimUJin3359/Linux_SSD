@@ -15,7 +15,7 @@ void write(int addr, char* value)
 		// read NAND
 		fgets(line, LINE, nand);
 		
-		// write RESULT
+		// write NAND
 		strtok_r(line, "]", &res);
 		strtok(res, "\n");
 		if(i==0 && i==addr) sprintf(cmd, "echo %s]%s > nand.txt", line, value);
@@ -48,7 +48,6 @@ void read(int addr)
 
 void fullWrite(char* value)
 {
-
 	FILE *nand = fopen("./nand.txt", "r");
 	
 	for(int i=0; i<100; i++)
@@ -75,7 +74,7 @@ void fullRead()
 		// read NAND
 		fgets(line, LINE, nand);
 		
-		// write RESULT
+		// write NAND
 		strtok_r(line, "]", &res);
 		strtok(res, "\n");
 		if(i==0) sprintf(cmd, "echo %s > result.txt", res);
@@ -89,24 +88,6 @@ void fullRead()
 
 int main(int argc, char *argv[])
 {
-	//printf("argc= %d\n", argc);
-	//for(int i=0;i<argc;i++) printf("%s ", argv[i]);
-	//printf("\n");
-	
-	/*
-	FILE *nand = fopen("./nand.txt", "r+");
-	FILE *result = fopen("./result.txt", "w");
-
-	// read NAND
-	char line[LINE];
-	fseek(nand, 2*(LINE-1), SEEK_SET);
-	fgets(line, LINE, nand);
-	printf("%d line= %s", 0, line);
-
-	// wrete RESULT
-	fwrite(line, 1, sizeof(line), result);
-	*/
-	
 	if(!strcmp(argv[1], "write")) write(atoi(argv[2]), argv[3]);
 	if(!strcmp(argv[1], "read")) read(atoi(argv[2]));
 	if(!strcmp(argv[1], "fullwrite")) fullWrite(argv[2]);
