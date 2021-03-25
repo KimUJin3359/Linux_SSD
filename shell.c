@@ -143,7 +143,11 @@ int main() {
 				}
 			}
 		}
-		else printf("INVALID COMMAND.\n");
+		else {
+			flag=1; 
+			printf("INVALID COMMAND.\n");
+			while (getchar() != '\n');
+		}
 
 	}
 }
