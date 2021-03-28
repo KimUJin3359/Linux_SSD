@@ -10,10 +10,11 @@ int main()
 
 	// ssd will make a result.txt
 	system("./ssd fullwrite 0xAAAAAAAA");
+	// ssd fullread to result_1.txt
 	system("./ssd fullread > ./test_result/result_1.txt");
-	// diff result.txt and test1.txti
+	// diff result_1.txt and test1.txti to diff.txt
 	system("diff ./test_result/test1.txt ./test_result/result_1.txt > ./test_result/diff.txt");
-	// open result1.txt
+	// open diff.txt
 	fd = fopen("./test_result/diff.txt", "r");
 	if (fd == NULL)
 	{
