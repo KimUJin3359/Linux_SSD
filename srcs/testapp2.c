@@ -33,10 +33,10 @@ int main()
 		sprintf(cmd, "./ssd read %d > ./test_result/result_2.txt", i);
 		system(cmd);
 
-		// diff result.txt and test2.txt
+		// diff result_2.txt and test2.txt to diff.txt
 		system("diff ./test_result/test2.txt ./test_result/result_2.txt > ./test_result/diff.txt");
 		
-		// open result2.txt
+		// open diff.txt
 		fd = fopen("./test_result/diff.txt", "r");
 		if (fd == NULL)
 		{
